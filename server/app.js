@@ -8,13 +8,14 @@
  */
 
 var express = require('express'); // Express web server framework
+const PORT = process.env.PORT || 3001;
 var request = require('request'); // "Request" library
 var querystring = require('querystring');
 var cookieParser = require('cookie-parser');
 
 var client_id = ''; // Your client id
 var client_secret = ''; // Your secret
-var redirect_uri = 'http://localhost:8888/callback'; // Or Your redirect uri
+var redirect_uri = 'http://localhost:3001/callback'; // Or Your redirect uri
 
 /**
  * Generates a random string containing numbers and letters
@@ -141,5 +142,6 @@ app.get('/refresh_token', function(req, res) {
   });
 });
 
-console.log('Listening on 8888');
-app.listen(8888);
+app.listen(PORT, () => {
+  console.log(`Server listening on: http://localhost:${PORT}.`)
+});
