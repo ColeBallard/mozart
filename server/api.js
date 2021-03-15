@@ -1,12 +1,12 @@
 const router = require("express").Router();
 const axios = require("axios");
 const path = require("path");
-require('dotenv').config;
+require('dotenv').config({path: path.join(__dirname, '/.env')});
 const request = require('request');
 const querystring = require('querystring');
 
-const client_id = ''; 
-const client_secret = ''; 
+const client_id = process.env.CLIENT_ID; 
+const client_secret = process.env.CLIENT_SECRET; 
 const redirect_uri = 'http://localhost:3001/callback'; 
 
 const generateRandomString = function(length) {
