@@ -8,6 +8,7 @@ app.use(express.json());
 
 app.use(express.static(__dirname + '/public'))
    .use(cookieParser());
+app.use(require("./api.js"));
 
 app.listen(PORT, () => {
   console.log(`Server listening on: http://localhost:${PORT}.`)

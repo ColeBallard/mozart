@@ -114,3 +114,5 @@ router.get('/refresh_token', function(req, res) {
     }
   });
 });
+
+module.exports = router;
