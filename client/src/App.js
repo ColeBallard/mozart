@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import SpotifyWebApi from 'spotify-web-api-js';
-import SpotifyUri from 'spotify-uri'
-// const spotifyUri = new SpotifyUri();
+import SpotifyUri from 'spotify-uri';
 const spotifyApi = new SpotifyWebApi();
 
 class App extends Component {
@@ -28,15 +27,10 @@ class App extends Component {
   }
 
   render() {
-    return (
-      <div className="App">
-        {this.state.loggedIn ? null: <a href='http://localhost:8888' > Login to Spotify </a>}
-
-        { this.state.loggedIn &&
-          <Form />
-        }
-      </div>
-    );
+    if (!this.state.loggedIn)
+      return window.location.href = 'http://localhost:3001'; 
+    else
+      return (<Form />);
   }
 }
 
