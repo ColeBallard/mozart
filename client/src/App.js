@@ -1,10 +1,20 @@
-import React, { Component } from 'react';
-import './App.css';
+import React from 'react';
 import SpotifyWebApi from 'spotify-web-api-js';
 import SpotifyUri from 'spotify-uri';
+import {
+  ChakraProvider,
+  Box,
+  theme,
+  Container,
+  Heading
+} from '@chakra-ui/react';
+import { ColorModeSwitcher } from './components/ColorModeSwitcher';
+import HookForm from './components/HookForm';
+import AudioPlayer from 'react-h5-audio-player';
+import 'react-h5-audio-player/lib/styles.css';
 const spotifyApi = new SpotifyWebApi();
 
-class App extends Component {
+class Spotify extends React.Component {
   constructor(){
     super();
     const params = this.getHashParams();
@@ -30,84 +40,33 @@ class App extends Component {
     if (!this.state.loggedIn)
       return window.location.href = 'http://localhost:3001'; 
     else
-      return (<Form />);
+      return (<Main />);
   }
 }
 
-class Form extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      value: '',
-      nowPlaying: { name: 'Not Checked', albumArt: '' , artists: []},
-      track: { name: '', albumArt: [] , artists: []}
-    }
+function App() {
+  return (
+    <Spotify />
+  );
+}
 
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
-  handleChange(event) {
-    this.setState({value: event.target.value});
-
-  }
-
-  handleSubmit(event) {
-    alert('A name was submitted: ' + this.state.value);
-    event.preventDefault();
-    let uri = SpotifyUri.parse(this.state.value)
-    console.log(uri.id)
-    this.getTrack(uri.id)
-  }
-
-  getTrack(id){
-    spotifyApi.getTrack(id)
-      .then((response) => {
-        console.log(response)
-        this.setState({
-          nowPlaying: { 
-              name: response.name, 
-              albumArt: response.album.images[0].url,
-              artists: response.artists
-            },
-          track: {
-            albumArt: response.album.images,
-          }
-        });
-        console.log(this.state.track.albumArt)
-      })
-  }
-
-  render() {
-    return (
-      <div>
-        <form onSubmit={this.handleSubmit}>
-          <label>
-            Track ID:
-            <input type="text" value={this.state.value} onChange={this.handleChange} />
-          </label>
-          <input type="submit" value="Submit" />
-        </form>
-
-        <div>
-          Track name: { this.state.nowPlaying.name }<br/>
-
-          {this.state.nowPlaying.artists.map(artist => (
-            <div key={artist.id}>
-              <span>{artist.name} </span>
-            </div>
-          ))}
-          {this.state.track.albumArt.map(image => (
-            <div key={image.url}>
-              <img src={image.url} alt=''/>
-            </div>
-          ))}
-        </div>
-
-      </div>
-
-    );
-  }
+function Main() {
+  return (
+    <ChakraProvider theme={theme}>
+      <Box textAlign="center">
+        <Container maxW="xl" my={4} centerContent>
+          <ColorModeSwitcher pos="absolute" right={4} />
+          <Heading as="h1" size="4xl" isTruncated>Mozart</Heading>
+          <Box padding="4" maxW="3xl">
+            <HookForm />
+          </Box>
+          <Box mt={4} width="100%">
+            <AudioPlayer src="http://example.com/audio.mp3" onPlay={e => console.log("onPlay")} />
+          </Box>
+        </Container>
+      </Box>
+    </ChakraProvider>
+  );
 }
 
 export default App;
