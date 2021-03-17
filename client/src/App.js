@@ -14,6 +14,25 @@ import AudioPlayer from 'react-h5-audio-player';
 import 'react-h5-audio-player/lib/styles.css';
 const spotifyApi = new SpotifyWebApi();
 
+function Main() {
+  return (
+    <ChakraProvider theme={theme}>
+      <Box textAlign="center">
+        <Container maxW="xl" my={4} centerContent>
+          <ColorModeSwitcher pos="absolute" right={4} />
+          <Heading as="h1" size="4xl" isTruncated>Mozart</Heading>
+          <Box padding="4" maxW="3xl">
+            <HookForm />
+          </Box>
+          <Box mt={4} width="100%">
+            <AudioPlayer src="http://example.com/audio.mp3" onPlay={e => console.log("onPlay")} />
+          </Box>
+        </Container>
+      </Box>
+    </ChakraProvider>
+  );
+}
+
 class Spotify extends React.Component {
   constructor(){
     super();
@@ -47,25 +66,6 @@ class Spotify extends React.Component {
 function App() {
   return (
     <Spotify />
-  );
-}
-
-function Main() {
-  return (
-    <ChakraProvider theme={theme}>
-      <Box textAlign="center">
-        <Container maxW="xl" my={4} centerContent>
-          <ColorModeSwitcher pos="absolute" right={4} />
-          <Heading as="h1" size="4xl" isTruncated>Mozart</Heading>
-          <Box padding="4" maxW="3xl">
-            <HookForm />
-          </Box>
-          <Box mt={4} width="100%">
-            <AudioPlayer src="http://example.com/audio.mp3" onPlay={e => console.log("onPlay")} />
-          </Box>
-        </Container>
-      </Box>
-    </ChakraProvider>
   );
 }
 
