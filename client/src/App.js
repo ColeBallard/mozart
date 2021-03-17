@@ -1,6 +1,4 @@
 import React from 'react';
-import SpotifyWebApi from 'spotify-web-api-js';
-import SpotifyUri from 'spotify-uri';
 import {
   ChakraProvider,
   Box,
@@ -12,9 +10,10 @@ import { ColorModeSwitcher } from './components/ColorModeSwitcher';
 import HookForm from './components/HookForm';
 import AudioPlayer from 'react-h5-audio-player';
 import 'react-h5-audio-player/lib/styles.css';
+import SpotifyWebApi from 'spotify-web-api-js';
 const spotifyApi = new SpotifyWebApi();
 
-function Main() {
+function Main(props) {
   return (
     <ChakraProvider theme={theme}>
       <Box textAlign="center">
@@ -22,7 +21,7 @@ function Main() {
           <ColorModeSwitcher pos="absolute" right={4} />
           <Heading as="h1" size="4xl" isTruncated>Mozart</Heading>
           <Box padding="4" maxW="3xl">
-            <HookForm />
+            <HookForm spotify={props.spotify} />
           </Box>
           <Box mt={4} width="100%">
             <AudioPlayer src="http://example.com/audio.mp3" onPlay={e => console.log("onPlay")} />
@@ -43,6 +42,7 @@ class Spotify extends React.Component {
     }
     this.state = { loggedIn: token ? true : false}
   }
+
   getHashParams() {
     var hashParams = {};
     var e, r = /([^&;=]+)=?([^&;]*)/g,
@@ -59,7 +59,7 @@ class Spotify extends React.Component {
     if (!this.state.loggedIn)
       return window.location.href = 'http://localhost:3001'; 
     else
-      return (<Main />);
+      return (<Main spotify={spotifyApi} />);
   }
 }
 

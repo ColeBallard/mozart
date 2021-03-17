@@ -9,7 +9,7 @@ import {
   Flex
 } from "@chakra-ui/react";
 
-export default function HookForm() {
+export default function HookForm(props) {
   const { handleSubmit, errors, register, formState } = useForm();
 
   function validateURI(value) {
@@ -20,12 +20,25 @@ export default function HookForm() {
     } else return true;
   }
 
+  function getPlaylistData(uri) {
+    const spotifyApi = props.spotify;
+    const newUri = uri.replace('spotify:playlist:', '');
+    console.log(newUri);
+    spotifyApi.getPlaylist(newUri)
+      .then(response => {
+        console.log(response)
+      },
+      err => {
+        console.log(err)
+      });
+  };
+
   function onSubmit(values) {
     return new Promise(resolve => {
       setTimeout(() => {
-        alert(JSON.stringify(values, null, 2));
+        getPlaylistData(values.uri);
         resolve();
-      }, 3000);
+      }, 500);
     });
   }
 
