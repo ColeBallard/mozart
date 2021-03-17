@@ -75,7 +75,7 @@ router.get('/callback', function(req, res) {
         };
 
         request.get(options, function(error, response, body) {
-          console.log(body);
+          
         });
 
         res.redirect('http://localhost:3000/#' +
