@@ -8,6 +8,7 @@ import {
   Button,
   Flex
 } from "@chakra-ui/react";
+import axios from "axios";
 
 export default function HookForm(props) {
   const { handleSubmit, errors, register, formState } = useForm();
@@ -20,17 +21,40 @@ export default function HookForm(props) {
     } else return true;
   }
 
+  function getAudioAnalysis(id) {
+    return new Promise(resolve => {
+      setTimeout(() => {
+        props.spotify.getAudioAnalysisForTrack(id)
+        .then(response => {
+          resolve(response);
+        })
+      }, 200);
+    })
+  }
+
   function getPlaylistData(uri) {
-    const spotifyApi = props.spotify;
-    const newUri = uri.replace('spotify:playlist:', '');
-    console.log(newUri);
-    spotifyApi.getPlaylist(newUri)
+    props.spotify.getPlaylist(uri.replace('spotify:playlist:', ''))
       .then(response => {
-        console.log(response)
+        const promises = [];
+        for (let item of response.tracks.items) {
+          promises.push(getAudioAnalysis(item.track.id));
+        }
+
+        Promise.all(promises)
+        .then(result => {
+          axios.post('/api/playlist', {
+            analysis: JSON.stringify(result)
+          }).then(response => {
+            console.log(response);
+          }).catch(error => {
+            console.log(error);
+          });
+        })
       },
       err => {
         console.log(err)
       });
+    
   };
 
   function onSubmit(values) {
