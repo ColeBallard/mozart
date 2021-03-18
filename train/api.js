@@ -3,10 +3,11 @@ const path = require("path");
 require('dotenv').config({path: path.join(__dirname, '/.env')});
 const request = require('request');
 const querystring = require('querystring');
+const spdl = require('./download');
 
 const client_id = process.env.CLIENT_ID; 
 const client_secret = process.env.CLIENT_SECRET; 
-const redirect_uri = 'http://localhost:3001/callback'; 
+const redirect_uri = 'http://localhost:3001/callback';
 
 const generateRandomString = function(length) {
   let text = '';
@@ -115,7 +116,12 @@ router.get('/refresh_token', function(req, res) {
 });
 
 router.post('/api/playlist', function(req, res) {
-  
+  const playlist = JSON.parse(req.body.playlist);
+
+  for (let x of playlist.tracks.items) {
+    console.log(x.track.external_urls.spotify);
+    spdl.download(x.track.external_urls.spotify);
+  }
 }); 
 
 module.exports = router;

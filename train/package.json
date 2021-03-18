@@ -1,22 +1,25 @@
 {
   "dependencies": {
-    "axios": "^0.21.1",
+    "@ffmpeg/core": "^0.8.5",
+    "@ffmpeg/ffmpeg": "^0.9.7",
+    "@magenta/music": "^1.21.0",
     "concurrently": "^6.0.0",
     "cookie-parser": "1.4.5",
     "dotenv": "^8.2.0",
     "express": "~4.17.1",
     "querystring": "~0.2.1",
-    "request": "~2.88.2"
+    "request": "~2.88.2",
+    "spdl-core": "^1.5.1",
+    "tone": "^14.7.77"
   },
   "name": "server",
   "version": "1.0.0",
   "main": "index.js",
-  "devDependencies": {},
   "scripts": {
     "server": "node index.js",
     "client": "npm start --prefix client",
     "client-install": "npm install --prefix client",
-    "dev": "concurrently \"npm run server\" \"cd ../client && npm start\"" 
+    "dev": "concurrently \"npm run server\" \"cd ../client && npm start\""
   },
   "keywords": [],
   "author": "",
