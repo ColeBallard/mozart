@@ -56,9 +56,9 @@ class Spotify extends React.Component {
   }
 
   render() {
-    if (!this.state.loggedIn)
-      return window.location.href = 'http://localhost:3001'; 
-    else
+    // if (!this.state.loggedIn)
+    //   return window.location.href = 'http://localhost:3001'; 
+    // else
       return (<Main spotify={spotifyApi} />);
   }
 }
