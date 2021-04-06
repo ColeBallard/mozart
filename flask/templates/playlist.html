@@ -7,11 +7,11 @@
     <div class="container text-white">
         <div class="mx-auto">
           <h3>mozart</h3>
-          <form id="form">
+          <form action="{{ url_for('playlist') }}" method="post">
             <label class="form-label">Spotify Playlist URI:</label>
             <div class="input-group mb-3">
               <span class="input-group-text">spotify:playlist:</span>
-              <input type="text" class="form-control" id="spotify-uri">
+              <input type="text" class="form-control" id="spotify-uri" name="spotify-uri">
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
           </form>
