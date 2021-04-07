@@ -44,4 +44,5 @@ source credentials.sh
 
 ## Tools
 - [Flask](https://flask.palletsprojects.com/en/1.1.x/)
+- [Gunicorn](https://gunicorn.org/)
 - [Spotipy](https://spotipy.readthedocs.io/en/2.17.1/)
