@@ -21,7 +21,7 @@ git clone https://github.com/ColeBallard/mozart
 
 2. Create a Spotify Web Developer account [here](https://developer.spotify.com/my-applications) and create a new application.
 
-3. In your application settings, add **`http://127.0.0.1:5000/oauth/callback`** to the **Redirect URIs**. 
+3. In the application settings, add `http://127.0.0.1:5000/oauth/callback` to the **Redirect URIs**. 
 
 4. Create a file called `credentials.sh` and add the following -
 ```sh
