@@ -1,7 +1,7 @@
 # Mozart
 
 ## Description
-App that transforms a spotify playlist into a new song using machine learning.
+App that uses a spotify playlist to make a new song using machine learning.
 
 ## Design
 - have user input a playlist with 10-30 songs
