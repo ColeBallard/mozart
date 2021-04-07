@@ -40,3 +40,7 @@ source credentials.sh
 6. Make a pull request.
 
 ## **[Contact](https://coleb.io/contact)**
+
+## Tools
+- [Flask](https://flask.palletsprojects.com/en/1.1.x/)
+- [Spotipy](https://spotipy.readthedocs.io/en/2.17.1/)
