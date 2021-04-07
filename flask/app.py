@@ -1,4 +1,4 @@
-import logging
+import os
 from flask import (
     Flask, redirect, render_template, request, url_for, session
 )
@@ -6,7 +6,7 @@ import spotipy
 from spotipy import oauth2
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = ''
+app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
 
 CACHE = '.spotifycache'
 sp_oauth = oauth2.SpotifyOAuth(cache_path=CACHE )
@@ -39,4 +39,5 @@ def playlist():
     print(playlist)
     return render_template('playlist.html')
     
-    
+if __name__ == '__main__':
+    app.run(threaded=True, port=5000)
