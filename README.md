@@ -25,9 +25,10 @@ git clone https://github.com/ColeBallard/mozart
 
 4. Create a file called `credentials.sh` and add the following -
 ```sh
+export SECRET_KEY=YOURSECRETKEY
 export SPOTIPY_CLIENT_ID=YOURCLIENTID
 export SPOTIPY_CLIENT_SECRET=YOURCLIENTSECRET
-export SPOTIPY_REDIRECT_URI='http://127.0.0.1:5000/oauth/callback'
+export SPOTIPY_REDIRECT_URI=http://127.0.0.1:5000/oauth/callback
 export FLASK_APP=server.py
 export FLASK_ENV=development
 ```
