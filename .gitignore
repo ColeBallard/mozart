@@ -2,12 +2,6 @@
 
 credentials.sh
 
-# exclude everything
-sav-downloads/*
-
-# exception to the rule
-!sav-downloads/.gitkeep 
-
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

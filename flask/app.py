@@ -41,10 +41,10 @@ def set_token():
 def playlist():
     access_token = session['access_token']
     sp_api = spotipy.Spotify(access_token)
-    uri = request.form['spotify-uri']
+    url = request.form['spotify-url']
     # playlist = sp_api.playlist(uri)
-    print(uri)
-    sav.download(uri, query_type=Type.PLAYLIST)
+    # print(playlist['tracks']['total'])
+    # sav.download(uri, query_type=Type.PLAYLIST)
     return render_template('playlist.html')
     
 if __name__ == '__main__':

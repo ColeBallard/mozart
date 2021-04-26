@@ -8,10 +8,9 @@
         <div class="mx-auto">
           <h3>mozart</h3>
           <form action="{{ url_for('playlist') }}" method="post">
-            <label class="form-label">Spotify Playlist URI:</label>
+            <label class="form-label">Spotify Playlist URL:</label>
             <div class="input-group mb-3">
-              <span class="input-group-text">spotify:playlist:</span>
-              <input type="text" class="form-control" id="spotify-uri" name="spotify-uri">
+              <input type="text" class="form-control" id="spotify-url" name="spotify-url">
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
           </form>
