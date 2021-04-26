@@ -4,11 +4,13 @@ from flask import (
 )
 import spotipy
 from spotipy import oauth2
+import logging
 from savify import Savify
 from savify.types import Type, Format, Quality
 from savify.utils import PathHolder
+from savify.logger import Logger
 
-sav = Savify(api_credentials=(os.getenv('SPOTIPY_CLIENT_ID'), os.getenv('SPOTIPY_CLIENT_SECRET')), path_holder=PathHolder(downloads_path='downloads'))
+sav = Savify(api_credentials=(os.getenv('SPOTIPY_CLIENT_ID'), os.getenv('SPOTIPY_CLIENT_SECRET')),quality=Quality.BEST, download_format=Format.FLAC, path_holder=PathHolder(downloads_path='sav-downloads'), group='%artist%/%album%', skip_cover_art=True, logger=Logger(log_location='info'))
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
@@ -41,8 +43,8 @@ def playlist():
     sp_api = spotipy.Spotify(access_token)
     uri = request.form['spotify-uri']
     # playlist = sp_api.playlist(uri)
-    
-    # sav.download(uri)
+    print(uri)
+    sav.download(uri, query_type=Type.PLAYLIST)
     return render_template('playlist.html')
     
 if __name__ == '__main__':
