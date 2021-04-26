@@ -10,7 +10,7 @@ from savify.types import Type, Format, Quality
 from savify.utils import PathHolder
 from savify.logger import Logger
 
-sav = Savify(api_credentials=(os.getenv('SPOTIPY_CLIENT_ID'), os.getenv('SPOTIPY_CLIENT_SECRET')),quality=Quality.BEST, download_format=Format.FLAC, path_holder=PathHolder(downloads_path='sav-downloads'), group='%artist%/%album%', skip_cover_art=True, logger=Logger(log_location='info'))
+sav = Savify(api_credentials=(os.getenv('SPOTIPY_CLIENT_ID'), os.getenv('SPOTIPY_CLIENT_SECRET')),quality=Quality.BEST, download_format=Format.WAV, path_holder=PathHolder(downloads_path='sav-downloads'), group='%artist%/%album%', skip_cover_art=True, logger=Logger(log_location='info'))
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
