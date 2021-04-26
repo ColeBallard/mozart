@@ -24,6 +24,7 @@ git clone https://github.com/ColeBallard/mozart
 3. In the application settings, add `http://127.0.0.1:5000/oauth/callback` to the **Redirect URIs**. 
 
 4. Install [virtualvenv](https://docs.python.org/3/tutorial/venv.html).
+
 On macOS and Linux:
 ```shell
 python3 -m pip install --user virtualenv
@@ -34,6 +35,7 @@ py -m pip install --user virtualenv
 ```
 
 5. Create the virtual environment (in the `flask` folder).
+
 On macOS and Linux:
 ```shell
 cd flask
@@ -46,6 +48,7 @@ py -m venv env
 ```
 
 6. Activate the virtual environment (still in the `flask` folder).
+
 On macOS and Linux:
 ```shell
 source env/bin/activate
