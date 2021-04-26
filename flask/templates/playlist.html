@@ -12,6 +12,11 @@
             <div class="input-group mb-3">
               <input type="text" class="form-control" id="spotify-url" name="spotify-url">
             </div>
+            {% if show_alert %}
+            <div class="alert alert-danger" role="alert">
+              The playlist should be between 10-20 songs and no song should be longer than 10 minutes.
+            </div>
+            {% endif %}
             <button type="submit" class="btn btn-primary">Submit</button>
           </form>
         </div>

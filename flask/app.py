@@ -18,8 +18,15 @@ app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
 CACHE = '.spotifycache'
 sp_oauth = oauth2.SpotifyOAuth(cache_path=CACHE)
 
-# def validate_playlist():
-
+def validate_playlist(playlist):
+  if (playlist['tracks']['total'] > 20):
+    return -1 # too many tracks
+  elif (playlist['tracks']['total'] < 10):
+    return -2 # not enough tracks
+  for item in playlist['tracks']['items']:
+    if(item['duration_ms'] >= 600000):
+      return -3 # track duration too long
+  return 1 # valid playlist
 
 @app.route('/', methods=['GET'])
 def login():
@@ -42,13 +49,27 @@ def set_token():
 
 @app.route('/playlist', methods=['POST'])
 def playlist():
+  show_alert = False
   access_token = session['access_token']
   sp_api = spotipy.Spotify(access_token)
   url = request.form['spotify-url']
-  # playlist = sp_api.playlist(uri)
-  # print(playlist['tracks']['total'])
-  # sav.download(uri, query_type=Type.PLAYLIST)
-  return render_template('playlist.html')
+  valid = validate_playlist(sp_api.playlist(url))
+  if (valid == 1): # valid playlist
+    show_alert = False
+    sav.download(url, query_type=Type.PLAYLIST)
+  elif (valid == -1):
+    print('too many tracks')
+    show_alert = True
+    # show too many tracks error message
+  elif (valid == -2):
+    print('not enough tracks')
+    show_alert = True
+    # show not enough tracks error message
+  elif (valid == -3):
+    print('track duration too long')
+    show_alert = True
+    # show track duration too long error message
+  return render_template('playlist.html', show_alert=show_alert)
     
 if __name__ == '__main__':
   app.run(threaded=True, port=5000)
