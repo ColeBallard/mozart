@@ -19,12 +19,13 @@ CACHE = '.spotifycache'
 sp_oauth = oauth2.SpotifyOAuth(cache_path=CACHE)
 
 def validate_playlist(playlist):
+  print(playlist)
   if (playlist['tracks']['total'] > 20):
     return -1 # too many tracks
   elif (playlist['tracks']['total'] < 10):
     return -2 # not enough tracks
   for item in playlist['tracks']['items']:
-    if(item['duration_ms'] >= 600000):
+    if(item['track']['duration_ms'] >= 600000):
       return -3 # track duration too long
   return 1 # valid playlist
 
