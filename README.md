@@ -93,6 +93,14 @@ flask run
 
 12. Make a pull request.
 
+Seperate audio files using spleeter.
+
+On macOS and Linux:
+```shell
+cd spleeter
+for f in sav_downloads/*.wav; do spleeter separate -o isolated_sounds -p spleeter:4stems-16kHz $f; done
+```
+
 ## **[Contact](https://coleb.io/contact)**
 
 ## Tools
