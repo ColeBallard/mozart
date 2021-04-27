@@ -23,7 +23,12 @@ git clone https://github.com/ColeBallard/mozart
 
 3. In the application settings, add `http://127.0.0.1:5000/oauth/callback` to the **Redirect URIs**. 
 
-4. Install [virtualvenv](https://docs.python.org/3/tutorial/venv.html).
+4. Install [ffmpeg](https://ffmpeg.org/) and [libsndfile](http://www.mega-nerd.com/libsndfile/).
+```shell
+conda install -c conda-forge ffmpeg libsndfile
+```
+
+5. Install [virtualvenv](https://docs.python.org/3/tutorial/venv.html).
 
 On macOS and Linux:
 ```shell
@@ -34,7 +39,7 @@ On Windows:
 py -m pip install --user virtualenv
 ```
 
-5. Create the virtual environment (in the `flask` folder).
+6. Create the virtual environment (in the `flask` folder).
 
 On macOS and Linux:
 ```shell
@@ -47,7 +52,7 @@ cd flask
 py -m venv env
 ```
 
-6. Activate the virtual environment (still in the `flask` folder).
+7. Activate the virtual environment (still in the `flask` folder).
 
 On macOS and Linux:
 ```shell
@@ -58,7 +63,7 @@ On Windows:
 .\env\Scripts\activate
 ```
 
-7. Create a file called `credentials.sh` (in the `flask` folder) and add the following (replace `YOURSECRETKEY` with a random string, [read more](https://flask.palletsprojects.com/en/1.1.x/config/)) -
+8. Create a file called `credentials.sh` (in the `flask` folder) and add the following (replace `YOURSECRETKEY` with a random string, [read more](https://flask.palletsprojects.com/en/1.1.x/config/)) -
 ```shell
 touch credentials.sh
 ```
@@ -71,17 +76,22 @@ export FLASK_APP=app.py
 export FLASK_ENV=development
 ```
 
-8. Add the variables in `credentials.sh` to the environment.
+9. Add the variables in `credentials.sh` to the environment.
 ```shell
 source credentials.sh
 ```
 
-9. Run flask.
+10. Install spleeter.
+```shell
+pip install spleeter
+```
+
+11. Run flask.
 ```shell
 flask run
 ```
 
-10. Make a pull request.
+12. Make a pull request.
 
 ## **[Contact](https://coleb.io/contact)**
 
@@ -90,3 +100,4 @@ flask run
 - [Gunicorn](https://gunicorn.org/)
 - [Spotipy](https://spotipy.readthedocs.io/en/2.17.1/)
 - [Savify](https://github.com/LaurenceRawlings/savify)
+- [Spleeter](https://github.com/deezer/spleeter)
