@@ -4,10 +4,9 @@
 App that uses a spotify playlist to make a new song using machine learning.
 
 ## Design
-- have user input a playlist with 10-30 songs
-- get playlist metadata from [Spotify API](https://developer.spotify.com/documentation/web-api/)
-- generate song based on inputted music using [Tensorflow](https://github.com/tensorflow/tensorflow) model
-- model should train on a variety of (good?) songs
+- have user input a playlist with 10-20 tracks, no track more than 10 minutes long (validate with [Spotipy](https://spotipy.readthedocs.io/en/2.17.1/))
+- download playlist using [Savify](https://github.com/LaurenceRawlings/savify)
+- isolate sounds using [Spleeter](https://github.com/deezer/spleeter) (4stems-16kHz)
 
 ## Contribution
 If you have an idea or want to report a bug, please create an issue.
