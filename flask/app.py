@@ -9,6 +9,8 @@ from savify import Savify
 from savify.types import Type, Format, Quality
 from savify.utils import PathHolder
 from savify.logger import Logger
+from spleeter.separator import Separator
+from spleeter.audio.adapter import AudioAdapter
 
 sav = Savify(api_credentials=(os.getenv('SPOTIPY_CLIENT_ID'), os.getenv('SPOTIPY_CLIENT_SECRET')),quality=Quality.BEST, download_format=Format.WAV, path_holder=PathHolder(downloads_path='../spleeter/sav_downloads'), skip_cover_art=True, logger=Logger(log_location='info'))
 
@@ -28,6 +30,20 @@ def validate_playlist(playlist):
     if(item['track']['duration_ms'] >= 600000):
       return -3 # track duration too long
   return 1 # valid playlist
+
+def make_music(url):
+  # sav.download(url, query_type=Type.PLAYLIST)
+  separator = Separator('spleeter:4stems-16kHz')
+  audio_loader = AudioAdapter.default()
+  sample_rate = 44100
+  raw_directory = '/Users/coleb/dev/mozart/audio/sav_downloads'
+  for file in sorted(os.listdir(raw_directory)):
+    filename = os.fsdecode(file)
+    if filename.endswith(".wav"):
+      separator.separate_to_file(os.path.join(raw_directory, filename), '/Users/coleb/dev/mozart/audio/isolated_sounds')
+      continue
+    else:
+      continue
 
 @app.route('/', methods=['GET'])
 def login():
@@ -57,7 +73,7 @@ def playlist():
   valid = validate_playlist(sp_api.playlist(url))
   if (valid == 1): # valid playlist
     show_alert = False
-    sav.download(url, query_type=Type.PLAYLIST)
+    make_music(url)
   elif (valid == -1):
     print('too many tracks')
     show_alert = True
@@ -74,3 +90,4 @@ def playlist():
     
 if __name__ == '__main__':
   app.run(threaded=True, port=5000)
+  
