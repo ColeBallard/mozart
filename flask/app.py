@@ -1,18 +1,17 @@
 import os
 from flask import (
-  Flask, redirect, render_template, request, url_for, session
+  Flask, redirect, render_template, request, session
 )
 import spotipy
 from spotipy import oauth2
-import logging
 from savify import Savify
 from savify.types import Type, Format, Quality
 from savify.utils import PathHolder
 from savify.logger import Logger
 from spleeter.separator import Separator
-from spleeter.audio.adapter import AudioAdapter
+import lyrics
 
-sav = Savify(api_credentials=(os.getenv('SPOTIPY_CLIENT_ID'), os.getenv('SPOTIPY_CLIENT_SECRET')),quality=Quality.BEST, download_format=Format.WAV, path_holder=PathHolder(downloads_path='../spleeter/sav_downloads'), skip_cover_art=True, logger=Logger(log_location='info'))
+sav = Savify(api_credentials=(os.getenv('SPOTIPY_CLIENT_ID'), os.getenv('SPOTIPY_CLIENT_SECRET')),quality=Quality.BEST, download_format=Format.WAV, path_holder=PathHolder(downloads_path='../audio/sav_downloads'), skip_cover_art=True, logger=Logger(log_location='info'))
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
@@ -31,11 +30,10 @@ def validate_playlist(playlist):
       return -3 # track duration too long
   return 1 # valid playlist
 
-def make_music(url):
-  # sav.download(url, query_type=Type.PLAYLIST)
+def make_music(playlist, url):
+  print(playlist)
+  sav.download(url, query_type=Type.PLAYLIST)
   separator = Separator('spleeter:4stems-16kHz')
-  audio_loader = AudioAdapter.default()
-  sample_rate = 44100
   raw_directory = '/Users/coleb/dev/mozart/audio/sav_downloads'
   for file in sorted(os.listdir(raw_directory)):
     filename = os.fsdecode(file)
@@ -44,7 +42,7 @@ def make_music(url):
       continue
     else:
       continue
-
+  
 @app.route('/', methods=['GET'])
 def login():
   token_info = sp_oauth.get_cached_token()
@@ -70,10 +68,11 @@ def playlist():
   access_token = session['access_token']
   sp_api = spotipy.Spotify(access_token)
   url = request.form['spotify-url']
-  valid = validate_playlist(sp_api.playlist(url))
+  playl = sp_api.playlist(url)
+  valid = validate_playlist(playl)
   if (valid == 1): # valid playlist
     show_alert = False
-    make_music(url)
+    make_music(playl, url)
   elif (valid == -1):
     print('too many tracks')
     show_alert = True
