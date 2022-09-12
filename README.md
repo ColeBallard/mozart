@@ -8,6 +8,13 @@ App that uses a spotify playlist to make a new song using machine learning.
 - download playlist using [Savify](https://github.com/LaurenceRawlings/savify)
 - isolate sounds using [Spleeter](https://github.com/deezer/spleeter) (4stems-16kHz)
 
+## Tools
+- [Flask](https://flask.palletsprojects.com/en/1.1.x/)
+- [Gunicorn](https://gunicorn.org/)
+- [Spotipy](https://spotipy.readthedocs.io/en/2.17.1/)
+- [Savify](https://github.com/LaurenceRawlings/savify)
+- [Spleeter](https://github.com/deezer/spleeter)
+
 ## Contribution
 If you have an idea or want to report a bug, please create an issue.
 
@@ -101,10 +108,3 @@ for f in sav_downloads/*.wav; do spleeter separate -o isolated_sounds -p spleete
 ```
 
 ## **[Contact](https://coleb.io/contact)**
-
-## Tools
-- [Flask](https://flask.palletsprojects.com/en/1.1.x/)
-- [Gunicorn](https://gunicorn.org/)
-- [Spotipy](https://spotipy.readthedocs.io/en/2.17.1/)
-- [Savify](https://github.com/LaurenceRawlings/savify)
-- [Spleeter](https://github.com/deezer/spleeter)
