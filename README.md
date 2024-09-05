@@ -107,4 +107,4 @@ cd spleeter
 for f in sav_downloads/*.wav; do spleeter separate -o isolated_sounds -p spleeter:4stems-16kHz $f; done
 ```
 
-## **[Contact](https://coleb.io/contact)**
+## **[Contact](https://github.com/ColeBallard/coleballard.github.io/blob/main/README.md)**
